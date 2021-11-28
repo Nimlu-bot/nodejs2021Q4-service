@@ -1,6 +1,7 @@
-// const router = require('express').Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
+import { get, getAll } from './user.service.js';
+import { User } from './user.model.js';
+
+// const User = require('./user.model');
 
 // router.route('/').get(async (req, res) => {
 //   const users = await usersService.getAll();
@@ -10,13 +11,16 @@ const usersService = require('./user.service');
 
 // module.exports = router;
 
-const userRoutes = (fastify, options, done) => {
+export const userRoutes = (fastify, options, done) => {
   fastify.get('/users', async (req, res) => {
-    const users = await usersService.getAll();
+    const users = await getAll();
+    res.send(users.map(User.toResponse));
+  });
+  fastify.get('/users?:id', async (req, res) => {
+    const { id } = req.param;
+    const users = await get(id);
     res.send(users.map(User.toResponse));
   });
 
   done();
 };
-
-module.exports = { userRoutes };
