@@ -9,7 +9,8 @@ export const boardRoutes = (fastify, options, done) => {
   fastify.get('/boards/:id', async (req, res) => {
     const { id } = req.params;
     const board = await get(id);
-    res.send(Board.toResponse(board));
+    if (board) res.send(Board.toResponse(board));
+    else res.code(404).send('not found');
   });
   fastify.post('/boards', async (req, res) => {
     const savedBoard = await save(req.body);
