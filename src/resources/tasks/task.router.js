@@ -7,13 +7,12 @@ export const taskRoutes = (fastify, options, done) => {
     res.send(tasks.map(Task.toResponse));
   });
   fastify.get('/boards/:boardId/tasks/:id', async (req, res) => {
-    // const { id } = req.params;
 
     const task = await get(req.params.id);
     if (task) {
       res.send(Task.toResponse(task));
     } else {
-      res.code(404).send('not found');
+      res.code(404).send('task not found');
     }
   });
   fastify.post('/boards/:boardId/tasks', async (req, res) => {
@@ -30,11 +29,6 @@ export const taskRoutes = (fastify, options, done) => {
 
   fastify.put('/boards/:boardId/tasks/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(
-      `1111111111111111111111111111111111111111111111${JSON.stringify(
-        req.body
-      )}`
-    );
     const task = await update(id, new Task(req.body));
 
     res.code(200).send(Task.toResponse(task));

@@ -3,7 +3,7 @@ import path from 'path';
 import swagger from 'fastify-swagger';
 import { userRoutes } from './resources/users/user.router.js';
 import { boardRoutes } from './resources/boards/board.router.js';
-import { taskRoutes } from './resources/boards copy/task.router.js';
+import { taskRoutes } from './resources/tasks/task.router.js';
 
 const api = path.resolve('./doc/api.yaml');
 const app = fastify({

@@ -1,4 +1,3 @@
-// const app = require('./app');
 import app from './app.js';
 import config from './common/config.js';
 
@@ -13,6 +12,4 @@ app.listen(
     }
     console.log(`Server is now listening on ${address}`);
   }
-
-  // console.log(`App is running on http://localhost:${PORT}`)
 );
