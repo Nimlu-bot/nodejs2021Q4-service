@@ -5,12 +5,13 @@ import {
   updateEntity,
   saveEntity,
 } from '../../common/db.js';
+import { Board } from './board.model';
 
 const TABLE_NAME = 'Boards';
 
 const bGetAll = async () => getAllEntities(TABLE_NAME);
 
-const bGet = async (id) => {
+const bGet = async (id: string) => {
   const board = await getEntity(TABLE_NAME, id);
   if (!board) {
     return null;
@@ -18,7 +19,7 @@ const bGet = async (id) => {
   return board;
 };
 
-const bRemove = async (id) => {
+const bRemove = async (id: string) => {
   try {
     await removeEntity(TABLE_NAME, id);
   } catch (error) {
@@ -26,7 +27,7 @@ const bRemove = async (id) => {
   }
 };
 
-const bUpdate = async (id, board) => {
+const bUpdate = async (id: string, board: Board) => {
   const entity = await updateEntity(TABLE_NAME, id, board);
   if (!entity) {
     console.error(`update couldn't find a board with id-${id}`);
@@ -34,6 +35,6 @@ const bUpdate = async (id, board) => {
   return entity;
 };
 
-const bSave = async (board) => saveEntity(TABLE_NAME, board);
+const bSave = async (board: Board) => saveEntity(TABLE_NAME, board);
 
 export { bGetAll, bGet, bRemove, bUpdate, bSave };

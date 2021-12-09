@@ -15,7 +15,7 @@ interface Params {
 }
 
 export const userRoutes: FastifyPluginAsync = fp(async (fastify) => {
-  fastify.get('/users', async (__, res: FastifyReply) => {
+  fastify.get('/users', async (_, res: FastifyReply) => {
     const users = await getAll();
     res.send(users.map(User.toResponse));
     // res.send('hi');

@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
-import { Column } from '../columns/column.model.js';
+import { Column } from '../columns/column.model';
+import { IBoard, IColumn } from '../../common/interfaces';
 
-export class Board {
+export class Board implements IBoard {
   constructor({
     id = uuid(),
     title = 'Board title',
@@ -12,12 +13,18 @@ export class Board {
     this.columns = columns.map((column) => new Column(column));
   }
 
-  static toResponse(board) {
+  id?: string | undefined;
+
+  title?: string | undefined;
+
+  columns: IColumn[];
+
+  static toResponse(board: IBoard) {
     const { id, title, columns } = board;
     return { id, title, columns };
   }
 
-  static fromRequest(body) {
+  static fromRequest(body: IBoard) {
     return new Board(body);
   }
 }
