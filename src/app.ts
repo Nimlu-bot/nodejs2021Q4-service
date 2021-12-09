@@ -3,7 +3,7 @@ import path from 'path';
 import swagger from 'fastify-swagger';
 import { userRoutes } from './resources/users/user.router';
 import { boardRoutes } from './resources/boards/board.router';
-// import { taskRoutes } from './resources/tasks/task.router.js';
+import { taskRoutes } from './resources/tasks/task.router';
 
 const api = path.resolve('./doc/api.yaml');
 const app = fastify({
@@ -24,5 +24,5 @@ app.get('/', async () => 'Service is running!');
 
 app.register(userRoutes);
 app.register(boardRoutes);
-// app.register(taskRoutes);
+app.register(taskRoutes);
 export default app;

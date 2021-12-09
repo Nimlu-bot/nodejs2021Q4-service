@@ -15,11 +15,11 @@ export interface IBoard {
   columns: IColumn[];
 }
 export interface ITask {
-  id: string | undefined;
-  title: string | undefined;
-  order: number | undefined;
-  description: string | undefined;
-  userId: string | undefined | null;
-  boardId: string | undefined;
-  columnId: string | undefined;
+  id?: string;
+  title?: string;
+  order?: number;
+  description?: string;
+  userId?: string | null;
+  boardId?: string;
+  columnId?: string;
 }
