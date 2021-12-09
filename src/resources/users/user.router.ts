@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply, FastifyPluginAsync } from 'fastify';
 import fp from 'fastify-plugin';
-import { get, getAll, save, remove, update } from './user.service.js';
-import { User } from './user.model.js';
+import { get, getAll, save, remove, update } from './user.service';
+import { User } from './user.model';
 
 interface Body {
   id: string;
@@ -27,7 +27,7 @@ export const userRoutes: FastifyPluginAsync = fp(async (fastify) => {
     res.send(id);
   });
   fastify.post('/users', async (req: FastifyRequest, res: FastifyReply) => {
-    const savedUser = await save(req.body);
+    const savedUser = await save(req.body as Body);
     res.code(201).send(User.toResponse(savedUser));
   });
 

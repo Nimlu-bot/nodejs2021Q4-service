@@ -1,4 +1,3 @@
-
 import {
   getAllEntities,
   getEntity,
@@ -7,11 +6,13 @@ import {
   saveEntity,
 } from '../../common/db.js';
 
+import { User } from './user.model';
+
 const TABLE_NAME = 'Users';
 
 const uGetAll = async () => getAllEntities(TABLE_NAME);
 
-const uGet = async (id) => {
+const uGet = async (id: string) => {
   const user = await getEntity(TABLE_NAME, id);
   if (!user) {
     console.error(`get couldn't find a user with id-${id}`);
@@ -19,7 +20,7 @@ const uGet = async (id) => {
   return user;
 };
 
-const uRemove = async (id) => {
+const uRemove = async (id: string) => {
   try {
     await removeEntity(TABLE_NAME, id);
   } catch (error) {
@@ -27,7 +28,7 @@ const uRemove = async (id) => {
   }
 };
 
-const uUpdate = async (id, user) => {
+const uUpdate = async (id: string, user: User) => {
   const entity = await updateEntity(TABLE_NAME, id, user);
   if (!entity) {
     console.error(`update couldn't find a user with id-${id}`);
@@ -35,6 +36,6 @@ const uUpdate = async (id, user) => {
   return entity;
 };
 
-const uSave = async (user) => saveEntity(TABLE_NAME, user);
+const uSave = async (user: User) => saveEntity(TABLE_NAME, user);
 
 export { uGetAll, uGet, uRemove, uUpdate, uSave };
