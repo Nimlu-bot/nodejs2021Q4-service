@@ -4,7 +4,7 @@ import {
   removeEntity,
   updateEntity,
   saveEntity,
-} from '../../common/db.js';
+} from '../../common/db';
 
 import { User } from './user.model';
 

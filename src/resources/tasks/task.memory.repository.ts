@@ -4,7 +4,7 @@ import {
   removeEntity,
   updateEntity,
   saveEntity,
-} from '../../common/db.js';
+} from '../../common/db';
 import { Task } from './task.model';
 
 const TABLE_NAME = 'Tasks';

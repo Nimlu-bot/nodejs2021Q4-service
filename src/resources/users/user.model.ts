@@ -23,7 +23,7 @@ export class User implements IUser {
 
   password: string;
 
-  static toResponse(user: IUser) {
+  static toResponse(user: User) {
     const { id, name, login } = user;
     return { id, name, login };
   }
