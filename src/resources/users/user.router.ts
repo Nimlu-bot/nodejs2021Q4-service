@@ -1,5 +1,4 @@
 import { FastifyRequest, FastifyReply, FastifyPluginAsync } from 'fastify';
-import fp from 'fastify-plugin';
 import { get, getAll, save, remove, update } from './user.service';
 import { User } from './user.model';
 
@@ -14,11 +13,11 @@ interface Params {
   id: string;
 }
 
-export const userRoutes: FastifyPluginAsync = fp(async (fastify) => {
+export const userRoutes: FastifyPluginAsync = async (fastify) => {
+	
   fastify.get('/users', async (_, res: FastifyReply) => {
     const users = (await getAll()) as User[];
     res.send(users.map(User.toResponse));
-    // res.send('hi');
   });
   fastify.get('/users/:id', async (req: FastifyRequest, res: FastifyReply) => {
     const { id } = req.params as Params;
@@ -46,6 +45,6 @@ export const userRoutes: FastifyPluginAsync = fp(async (fastify) => {
 
     res.code(200).send(User.toResponse(user as User));
   });
-}, '3.x');
+};
 
 // export const userRoutes = fp(routes);
