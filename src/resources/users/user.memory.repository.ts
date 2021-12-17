@@ -18,9 +18,9 @@ const TABLE_NAME = 'Users';
 const uGetAll = async () => getAllEntities(TABLE_NAME) as User[];
 
 /**
- * get user in database from id
+ * get user from database with id
  * @param  id - id of user string
- * @returns  user with specific id or undefined  Promise\<User[]| undefined\>
+ * @returns  user with specific id or undefined  Promise\<User| undefined\>
  */
 
 const uGet = async (id: string) => {
@@ -49,7 +49,7 @@ const uRemove = async (id: string) => {
  * update user in database from id
  * @param  id - id of user string
  * @param  user - new user data User
- * @returns    user with specific id or undefined  Promise\<User[]| undefined\>
+ * @returns    user with specific id or undefined  Promise\<User| undefined\>
  */
 
 const uUpdate = async (id: string, user: User) => {
@@ -63,7 +63,7 @@ const uUpdate = async (id: string, user: User) => {
 /**
  * save user in database from id
  * @param  user -  new user data User
- * @returns  user with specific id or undefined  Promise\<User[]| undefined\>
+ * @returns  user with specific id or undefined  Promise\<User| undefined\>
  */
 
 const uSave = async (user: User) =>
