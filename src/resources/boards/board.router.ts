@@ -6,6 +6,12 @@ interface Params {
   id: string;
 }
 
+/**
+ * create board routes
+ * @param  fastify - instance of fastify server FastifyInstance
+ * @returns  Promice<void>
+ */
+
 export const boardRoutes: FastifyPluginAsync = async (fastify) => {
   fastify.get('/boards', async (_, res) => {
     const boards = (await getAll()) as Board[];

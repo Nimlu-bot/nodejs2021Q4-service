@@ -2,6 +2,11 @@ import { v4 as uuid } from 'uuid';
 import { ITask } from '../../common/interfaces';
 
 export class Task implements ITask {
+  /**
+   * create new task
+   * @param  task - task data id:string title:string order:number description:string userId:string | null | undefined boardId:string columnId:string
+   * @returns  task data Task
+   */
   constructor(
     {
       id = uuid(),
@@ -36,6 +41,12 @@ export class Task implements ITask {
 
   columnId?: string;
 
+	/**
+   * prepare task data to response
+   * @param  task - task data Task
+   * @returns  task data to response  id:string title:string order:number description:string userId:string | null | undefined boardId:string columnId:string
+   */
+
   static toResponse(task: Task) {
     const { id, title, order, description, userId, boardId, columnId } = task;
     return {
@@ -48,8 +59,4 @@ export class Task implements ITask {
       columnId,
     };
   }
-
-  // static fromRequest(body: Task) {
-  //   return new Task(body);
-  // }
 }

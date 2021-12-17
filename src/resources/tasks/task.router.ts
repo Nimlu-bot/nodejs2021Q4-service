@@ -5,6 +5,12 @@ import { Task } from './task.model';
 interface Params {
   id: string;
 }
+
+/**
+ * create task routes
+ * @param  fastify - instance of fastify server FastifyInstance
+ * @returns  Promice<void>
+ */
 export const taskRoutes: FastifyPluginAsync = async (fastify) => {
   fastify.get('/boards/:boardId/tasks', async (_, res) => {
     const tasks = await getAll();

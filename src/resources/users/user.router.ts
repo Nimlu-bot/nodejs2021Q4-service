@@ -13,6 +13,12 @@ interface Params {
   id: string;
 }
 
+/**
+ * create user routes
+ * @param  fastify - instance of fastify server FastifyInstance
+ * @returns  Promice<void>
+ */
+
 export const userRoutes: FastifyPluginAsync = async (fastify) => {
 	
   fastify.get('/users', async (_, res: FastifyReply) => {
