@@ -8,6 +8,13 @@ const db: { Users: Array<User>; Boards: Array<Board>; Tasks: Array<Task> } = {
   Tasks: [],
 };
 
+/**
+ * find index of entity
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @param  entity- entity  User | Board | Task
+ * @returns  index of entity number
+ */
+
 const findIndex = (
   tableName: 'Users' | 'Boards' | 'Tasks',
   entity: User | Board | Task
@@ -21,6 +28,10 @@ const findIndex = (
   return index;
 };
 
+/**
+ * set userId to nul when user deleted
+ * @param  user - user data  User
+ */
 const fixUsers = (user: User) => {
   if (user) {
     const newTaskDb = db.Tasks.map((task) => ({
@@ -31,12 +42,23 @@ const fixUsers = (user: User) => {
   }
 };
 
+/**
+ * delete tasks when board delete
+ * @param  board - board data Board
+ */
+
 const fixBoards = (board: Board) => {
   if (board) {
     const newTaskDb = db.Tasks.filter((task) => task.boardId !== board.id);
     db.Tasks = newTaskDb;
   }
 };
+
+/**
+ * get all entities from bd
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @returns  entities User[] | Board[] | Task[]
+ */
 
 export const getAllEntities = (
   tableName: 'Users' | 'Boards' | 'Tasks'
@@ -47,6 +69,13 @@ export const getAllEntities = (
     return db['Boards'].filter((entity: Board) => entity);
   return db['Tasks'].filter((entity: Task) => entity);
 };
+
+/**
+ * get entity from bd
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @param  id -  id of entity string | undefined
+ * @returns  entity User | Board | Task | undefined
+ */
 
 export const getEntity = (
   tableName: 'Users' | 'Boards' | 'Tasks',
@@ -60,10 +89,15 @@ export const getEntity = (
   } else entities = db['Tasks'].filter((entity: Task) => entity.id === id);
   return entities[0];
 };
-
+/**
+ * remove entity in bd
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @param  id -  id of entity string | undefined
+ * @returns    true if entity deleted false otherwise boolean
+ */
 export const removeEntity = (
   tableName: 'Users' | 'Boards' | 'Tasks',
-  id: string
+  id: string | undefined
 ): boolean => {
   const entity = getEntity(tableName, id);
 
@@ -76,7 +110,12 @@ export const removeEntity = (
   }
   return false;
 };
-
+/**
+ * save entity in bd
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @param  entity - entity User | Board | Task
+ * @returns   saved entity User | Board | Task | undefined
+ */
 export const saveEntity = (
   tableName: 'Users' | 'Boards' | 'Tasks',
   entity: User | Board | Task
@@ -86,9 +125,16 @@ export const saveEntity = (
   } else if (tableName === 'Boards') {
     db[tableName].push(entity as Board);
   } else db[tableName].push(entity as Task);
-  // db[tableName].push(entity);
   return getEntity(tableName, entity.id);
 };
+
+/**
+ * update entity in bd
+ * @param  tableName - name of table 'Users' | 'Boards' | 'Tasks'
+ * @param  id -  id of entity string | undefined
+ * @param  entity - entity User | Board | Task
+ * @returns   updated entity User | Board | Task | undefined
+ */
 
 export const updateEntity = (
   tableName: 'Users' | 'Boards' | 'Tasks',
